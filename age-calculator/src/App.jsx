@@ -8,84 +8,101 @@ import DayDisplay from "./components/DayDisplay";
 import ButtonCalculate from "./components/ButtonCalculate";
 import { useState } from "react";
 
+
+function getDaysInMonth(year, month) {
+   return new Date(year, month, 0).getDate();
+}
 function App() {
 
-  const [day,setDay] = useState();
-  const [month,setMonth] = useState();
-  const [year,setYear] = useState();
-  const [calculatedYears,setCalculatedYears] = useState("--");
-  const [calculatedMonths,setCalculatedMonths] = useState("--");
-  const [calcultateDays,setCalculatedDays]=useState("--");
-  const [errors,setErrors] = useState({day:"",month:"",year:""});
-  function calculateAge(){
-    /*Empty Input Erros */
-    setErrors({day:"",month:"",year:""});
-    
-   let newErrors = {dayError:"",monthError:"",yearError:""};
+   const [day, setDay] = useState();
+   const [month, setMonth] = useState();
+   const [year, setYear] = useState();
+   const [calculatedYears, setCalculatedYears] = useState("--");
+   const [calculatedMonths, setCalculatedMonths] = useState("--");
+   const [calcultateDays, setCalculatedDays] = useState("--");
+   const [errors, setErrors] = useState({ day: "", month: "", year: "" });
 
-   if(!day){
-      newErrors.day = "Field is required";
+
+
+   function calculateAge() {
+      /*Empty Input Erros */
+      setErrors({ day: "", month: "", year: "" });
+
+      let newErrors = { day: "", month: "", year: "" };
+      let maxDaysInTheMonth = getDaysInMonth(year, month);
+      let currentYear = new Date().getUTCFullYear();
+      let currentMonth = new Date().getUTCMonth();
+      let currentDay = new Date().getDate();
+
+      console.log(currentDay);
+      let parsedMonth = Number(month);
+      let parsedDay = Number(day);
+      let parsedYear = Number(year);
+
+
+      if (!day || !month || !year) {
+         if (!day) {
+            newErrors.day = "Field is required";
+         }
+         if (!month) {
+            newErrors.month = "Field is required";
+         }
+         if (!year) {
+            newErrors.year = "Field is required";
+         }
+      }
+      else {
+
+         if (parsedDay < 1 || parsedDay > maxDaysInTheMonth) {
+            newErrors.day = "Must be a valid day";
+         }
+         if (parsedMonth < 1 || parsedMonth > 12) {
+            newErrors.month = "Must be a valid month";
+         }
+
+         if (parsedYear > currentYear) {
+            newErrors.year = "Must be in the past";
+         }
+
+         else if (parsedYear === currentYear && parsedMonth > (currentMonth + 1)) {
+            newErrors.month = "Must be in the past";
+         }
+         else if (parsedYear === currentYear && parsedMonth === (currentMonth + 1) && parsedDay >= currentDay) {
+            newErrors.day = "Must be in the past";
+         }
+      }
+      if (newErrors.day || newErrors.month || newErrors.year) {
+         setErrors(newErrors);
+         return;
+      }
+
+      let fullYears = (currentMonth < parsedMonth - 1) ? currentYear - parsedYear - 1 : currentYear - parsedYear;
+
+      let fullMonths = (currentMonth + 1) < (parsedMonth) ? (currentMonth + 1 + 12) - parsedMonth : (currentMonth + 1) - parsedMonth;
+
+      let fullDays = (currentDay < parsedDay) ? (getDaysInMonth(currentYear, currentMonth) + currentDay - parsedDay) : (currentDay - parsedDay);
+
+      setCalculatedYears(fullYears);
+      setCalculatedMonths(fullMonths);
+      setCalculatedDays(fullDays);
+
    }
-   if(!month){
-      newErrors.month = "Field is required";
-   }
-   if(!year){
-      newErrors.year = "Field is required";
-   }
-   if(newErrors.day || newErrors.month || newErrors.year){
-    setErrors(newErrors);
-    return;
-   }
+   return (
+      <main className="main-container">
+         <div className="date-inputs">
+            <DayInput day={day} onChange={(e) => setDay(e.target.value)} error={errors.day}> </DayInput>
+            <MonthInput month={month} onChange={(e) => setMonth(e.target.value)} error={errors.month}> </MonthInput>
+            <YearInput year={year} onChange={(e) => setYear(e.target.value)} error={errors.year}></YearInput>
+         </div>
+         <ButtonCalculate onClick={calculateAge}></ButtonCalculate>
+         <div className="date-display">
+            <YearsDisplay years={calculatedYears}></YearsDisplay>
+            <MonthDisplay months={calculatedMonths}></MonthDisplay>
+            <DayDisplay days={calcultateDays}></DayDisplay>
+         </div>
+      </main>
 
-   
-  
-    
-    
-    
-    /*
-Errors - 
-1 - If any input is empty: 
-    ➝ throw "Field is required"
-
-2 - If day input is invalid:
-    a) If the day is less than 1 or greater than 31:
-       ➝ throw "Must be a valid day"
-    b) If the day exceeds the maximum number of days for the given month:
-       ➝ throw "Must be a valid day"
-       (Example: February 30, April 31)
-
-3 - If the month input is invalid:
-    a) If the month is less than 1 or greater than 12:
-       ➝ throw "Must be a valid month"
-
-4 - If the year input is invalid:
-    a) If the year is greater than the current year:
-       ➝ throw "Must be in the past"
-    b) If the year is equal to the current year but the month is in the future:
-       ➝ throw "Must be a valid month"
-    c) If the year is equal to the current year and the month is valid but the day is in the future:
-       ➝ throw "Must be a valid day"
-*/
-
-
-
-  }
-  return (
-    <main className="main-container">
-      <div className="date-inputs">
-        <DayInput day={day} onChange={(e)=> setDay(e.target.value)} error={errors.day}> </DayInput>
-        <MonthInput month={month} onChange={(e)=> setMonth(e.target.value)} error={errors.month}> </MonthInput>
-        <YearInput year={year} onChange = {(e)=>setYear(e.target.value)} error={errors.year}></YearInput>
-      </div>
-      <ButtonCalculate onClick={calculateAge}></ButtonCalculate>
-      <div className="date-display">
-        <YearsDisplay years={calculatedYears}></YearsDisplay>
-        <MonthDisplay months={calculatedMonths}></MonthDisplay>
-        <DayDisplay days={calcultateDays}></DayDisplay>
-      </div>
-    </main>
-
-  );
+   );
 }
 
 export default App
