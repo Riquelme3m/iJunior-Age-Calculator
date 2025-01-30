@@ -53,14 +53,18 @@ function App() {
       }
       else {
 
-         if (parsedDay < 1 || parsedDay > maxDaysInTheMonth) {
-            newErrors.day = "Must be a valid day";
-         }
-         if (parsedMonth < 1 || parsedMonth > 12) {
-            newErrors.month = "Must be a valid month";
+         if(parsedDay < 1 || parsedDay > maxDaysInTheMonth || parsedMonth < 1 || parsedMonth > 12){
+            if (parsedDay < 1 || parsedDay > maxDaysInTheMonth) {
+               newErrors.day = "Must be a valid day";
+            }
+   
+            if (parsedMonth < 1 || parsedMonth > 12) {
+               newErrors.month = "Must be a valid month";
+            }
          }
 
-         if (parsedYear > currentYear) {
+
+         else if (parsedYear > currentYear) {
             newErrors.year = "Must be in the past";
          }
 
