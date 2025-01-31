@@ -1,10 +1,6 @@
 import "./styles/style.css"
-import DayInput from "./components/DayInput";
-import MonthInput from "./components/MonthInput";
-import YearInput from "./components/YearInput";
-import YearsDisplay from "./components/YearDisplay";
-import MonthDisplay from "./components/MonthDisplay";
-import DayDisplay from "./components/DayDisplay";
+import Input from "./components/Input";
+import Display from "./components/Display";
 import ButtonCalculate from "./components/ButtonCalculate";
 import { useState } from "react";
 
@@ -19,7 +15,7 @@ function App() {
    const [year, setYear] = useState();
    const [calculatedYears, setCalculatedYears] = useState("--");
    const [calculatedMonths, setCalculatedMonths] = useState("--");
-   const [calcultateDays, setCalculatedDays] = useState("--");
+   const [calculatedDays, setCalculatedDays] = useState("--");
    const [errors, setErrors] = useState({ day: "", month: "", year: "" });
 
 
@@ -94,18 +90,18 @@ function App() {
    return (
       <main className="main-container">
          <div className="date-inputs">
-            <DayInput day={day} onChange={(e) => setDay(e.target.value)} error={errors.day}> </DayInput>
-            <MonthInput month={month} onChange={(e) => setMonth(e.target.value)} error={errors.month}> </MonthInput>
-            <YearInput year={year} onChange={(e) => setYear(e.target.value)} error={errors.year}></YearInput>
+            <Input type="day" value={day} onChange={(e) => setDay(e.target.value)} error={errors.day} />
+            <Input type="month" value={month} onChange={(e) => setMonth(e.target.value)} error={errors.month} />
+            <Input type="year" value={year} onChange={(e) => setYear(e.target.value)} error={errors.year} />
          </div>
          <div className="division">
             <hr/>
             <ButtonCalculate onClick={calculateAge}></ButtonCalculate>
          </div>
          <div className="date-display">
-            <YearsDisplay years={calculatedYears}></YearsDisplay>
-            <MonthDisplay months={calculatedMonths}></MonthDisplay>
-            <DayDisplay days={calcultateDays}></DayDisplay>
+            <Display years={calculatedYears}></Display>
+            <Display months={calculatedMonths}></Display>
+            <Display days={calculatedDays}></Display>
          </div>
       </main>
 
