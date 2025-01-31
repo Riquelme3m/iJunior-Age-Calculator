@@ -4,6 +4,40 @@
 
 /*Font size input : 32px*/
 
-img{
-    background-color: aquamarine;
+button {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+img {
+    width: 60px;
+    height: 60px;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: var(--Purple);
+    border-radius: 50%;
+}
+
+img:hover {
+    background-color: black;
+}
+
+.date-inputs {
+    display: flex;
+    gap: 20px;
+}
+
+.division {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: -10px;
+
+    & hr {
+        width: 100%;
+        height: 0;
+        border: 0.5px solid var(--Light-grey);
+    }
 }

@@ -98,7 +98,10 @@ function App() {
             <MonthInput month={month} onChange={(e) => setMonth(e.target.value)} error={errors.month}> </MonthInput>
             <YearInput year={year} onChange={(e) => setYear(e.target.value)} error={errors.year}></YearInput>
          </div>
-         <ButtonCalculate onClick={calculateAge}></ButtonCalculate>
+         <div className="division">
+            <hr/>
+            <ButtonCalculate onClick={calculateAge}></ButtonCalculate>
+         </div>
          <div className="date-display">
             <YearsDisplay years={calculatedYears}></YearsDisplay>
             <MonthDisplay months={calculatedMonths}></MonthDisplay>
