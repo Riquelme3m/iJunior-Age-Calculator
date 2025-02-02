@@ -1,0 +1,19 @@
+#button-calculate {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#arrow {
+    width: 60px;
+    height: 60px;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: var(--Purple);
+    border-radius: 50%;
+}
+
+#arrow:hover {
+    background-color: black;
+}

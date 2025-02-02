@@ -1,7 +1,7 @@
 import "./styles/style.css"
-import Input from "./components/Input";
-import Display from "./components/Display";
-import ButtonCalculate from "./components/ButtonCalculate";
+import Input from "./components/Input/Input";
+import Display from "./components/Display/Display";
+import ButtonCalculate from "./components/ButtonCalculate/ButtonCalculate";
 import { useState } from "react";
 
 

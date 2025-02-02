@@ -1,4 +1,5 @@
 import React from "react";
+import './Input.css'
 
 function Input({type, value, onChange, error}) {
     const configs = {
@@ -6,19 +7,19 @@ function Input({type, value, onChange, error}) {
             placeholder: "DD",
             min: 1,
             max: 31,
-            label: "DAY"
+            label: "D A Y"
         },
         month: {
             placeholder: "MM",
             min: 1,
             max: 12,
-            label: "MONTH"
+            label: "M O N T H"
         },
         year: {
             placeholder: "YYYY",
             min: 0,
             max: new Date().getFullYear(),
-            label: "YEAR"
+            label: "Y E A R"
         }
     };
 
