@@ -13,9 +13,9 @@ function App() {
    const [day, setDay] = useState();
    const [month, setMonth] = useState();
    const [year, setYear] = useState();
-   const [calculatedYears, setCalculatedYears] = useState("--");
-   const [calculatedMonths, setCalculatedMonths] = useState("--");
-   const [calculatedDays, setCalculatedDays] = useState("--");
+   const [calculatedYears, setCalculatedYears] = useState("- -");
+   const [calculatedMonths, setCalculatedMonths] = useState("- -");
+   const [calculatedDays, setCalculatedDays] = useState("- -");
    const [errors, setErrors] = useState({ day: "", month: "", year: "" });
 
 

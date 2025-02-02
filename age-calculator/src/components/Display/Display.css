@@ -1,9 +1,12 @@
 .display-item {
-    font-size: 32px;
+    font-size: 55px;
     font-weight: 800;
+    font-style: italic;
+    font-family: 'Poppins', sans-serif; /* ensure font family is explicitly set */
 }
 
 .number {
+    height: fit-content;
     color: var(--Purple);
 }
 
